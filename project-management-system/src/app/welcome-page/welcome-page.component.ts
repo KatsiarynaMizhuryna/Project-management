@@ -1,10 +1,19 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {Router} from "@angular/router";
 
-@Component({
-  selector: 'app-welcome-page',
-  templateUrl: './welcome-page.component.html',
-  styleUrls: ['./welcome-page.component.css']
-})
-export class WelcomePageComponent {
+import {AccountService} from "../_services/account.service";
 
+@Component({ templateUrl: 'welcome-page.component.html' })
+export class WelcomePageComponent implements OnInit{
+  constructor(
+    private router: Router,
+    private accountService: AccountService
+  ) { }
+
+  ngOnInit() {
+    const user = this.accountService.userValue;
+    if (user) {
+      this.router.navigateByUrl('/');
+    }
+  }
 }

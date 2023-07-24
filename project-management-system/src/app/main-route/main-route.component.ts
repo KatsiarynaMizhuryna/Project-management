@@ -1,10 +1,13 @@
 import { Component } from '@angular/core';
 
-@Component({
-  selector: 'app-main-route',
-  templateUrl: './main-route.component.html',
-  styleUrls: ['./main-route.component.css']
-})
-export class MainRouteComponent {
+import { User} from "../_models/User";
+import { AccountService} from "../_services/account.service";
 
+@Component({ templateUrl: 'main-route.component.html' })
+export class MainRouteComponent {
+  user: User | null;
+
+  constructor(private accountService: AccountService) {
+    this.user = this.accountService.userValue;
+  }
 }

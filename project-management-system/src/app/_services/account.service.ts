@@ -29,8 +29,6 @@ export class AccountService {
       .pipe(map(data => {
         const user = JSON.parse(atob(data.token!.split('.')[1]));
         user.token = data.token;
-        user.username = user.login;
-        delete user.login;
         // store user details and jwt token in local storage to keep user logged in between page refreshes
         localStorage.setItem('user', JSON.stringify(user));
         this.userSubject.next(user);
