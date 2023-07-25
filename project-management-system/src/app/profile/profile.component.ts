@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 
@@ -15,9 +15,8 @@ export class ProfileComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private route: ActivatedRoute,
     private router: Router,
-    private accountService: AccountService,
+    private accountService: AccountService
    // private alertService: AlertService
   ) {}
 
@@ -75,5 +74,10 @@ export class ProfileComponent implements OnInit {
     // update user
     return this.accountService.update(this.id!, this.form.value);
   }
-}
 
+  deleteUser() {
+    this.accountService.delete(this.id!)
+      .pipe(first())
+      .subscribe(() => this.id = undefined);
+  }
+}
