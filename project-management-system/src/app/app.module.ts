@@ -9,7 +9,7 @@ import { FooterComponent } from './core/footer/footer.component';
 import { MainRouteComponent } from './main-route/main-route.component';
 import { BoardComponent } from './board/board.component';
 import { WelcomePageComponent } from './welcome-page/welcome-page.component';
-import { ReactiveFormsModule } from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { JwtInterceptor } from './_helpers/jwt.interceptor';
 import { ErrorInterceptor } from './_helpers/error.interceptor';
@@ -17,6 +17,11 @@ import { ProfileComponent } from './profile/profile.component';
 import { BoardCardComponent } from './board-page/board-card/board-card.component';
 import { MatIconModule } from '@angular/material/icon';
 import {MatButtonModule} from "@angular/material/button";
+import { DialogComponent } from './dialog/dialog.component';
+import {MatDialogModule} from "@angular/material/dialog";
+import { BoardItemComponent } from './board-page/board-item/board-item.component';
+import {MatInputModule} from "@angular/material/input";
+import {CdkDrag, CdkDropList, CdkDropListGroup} from "@angular/cdk/drag-drop";
 
 @NgModule({
   declarations: [
@@ -27,7 +32,9 @@ import {MatButtonModule} from "@angular/material/button";
     BoardComponent,
     WelcomePageComponent,
     ProfileComponent,
-    BoardCardComponent
+    BoardCardComponent,
+    DialogComponent,
+    BoardItemComponent
   ],
   imports: [
     BrowserModule,
@@ -36,7 +43,13 @@ import {MatButtonModule} from "@angular/material/button";
     ReactiveFormsModule,
     HttpClientModule,
     MatIconModule,
-    MatButtonModule
+    MatButtonModule,
+    MatDialogModule,
+    MatInputModule,
+    FormsModule,
+    CdkDropList,
+    CdkDropListGroup,
+    CdkDrag
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
