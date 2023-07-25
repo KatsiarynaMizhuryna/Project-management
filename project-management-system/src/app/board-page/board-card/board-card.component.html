@@ -1,6 +1,6 @@
 <div class="shadow  m-5 p-2">
   <div class="flex justify-between items-center w-full">
-    <button mat-icon-button [routerLink]="'/new-board'">
+    <button mat-icon-button [routerLink]="'/main-route'">
       <mat-icon>arrow_back</mat-icon>
     </button>
     <span class="text-2xl font-semi-bold"></span>
@@ -21,11 +21,15 @@
           <mat-icon class="text-2xl">delete</mat-icon>
         </button>
       </div>
-      <app-add-new-element-dialog (emitText)="onAddCard($event, column.id)" [question]="'Add new card in ' + column.title + ' column'">
+      <app-add-new-element-dialog
+        (emitText)="onAddCard($event, column.id)"
+        [question]="'Add new card in ' + column.title + ' column'">
         <button  class="px-4 py-2 bg-gray-200 text-black rounded-md w-full mb-1">&#43;</button>
       </app-add-new-element-dialog>
 
-      <div cdkDropList [cdkDropListData]="column.list" class="example-list" (cdkDropListDropped)="drop($event)">
+      <div cdkDropList [cdkDropListData]="column.list"
+           class="example-list"
+           (cdkDropListDropped)="drop($event)">
         <div cdkDrag class="example-box" [ngStyle]="{background: column.color}" *ngFor="let item of column.list">
           <app-board-item
             [item]="item"

@@ -10,7 +10,7 @@ export class BoardService {
     {
       id: 1,
       title: 'To Do',
-      color: '#d8e7e4',
+      color: '#e7f8f4',
       list: [
         {
           id: 1,
@@ -56,7 +56,7 @@ export class BoardService {
     const newColumn: Column = {
       id: Date.now(),
       title: title,
-      color: '#d8e7e4',
+      color: '#e7f8f4',
       list: [],
     };
 
