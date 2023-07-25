@@ -1,1 +1,10 @@
 <p>/*******************main-route you're logged in as {{user?.login}} **************/</p>
+<div class="flex gap-3 gap items-start flex-wrap p-6">
+<div *ngFor="let board of boards"
+     class="flex  p-2 shadow-sm bg-yellow-50 rounded border-gray-700">
+  <h2 class="m-0">{{ board.title }}</h2>
+  <button mat-icon-button class="icon-delete" (click)="deleteBoard(board._id)">
+    <mat-icon class="text-2xl">delete</mat-icon>
+  </button>
+</div>
+</div>

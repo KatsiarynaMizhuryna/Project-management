@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output} from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
@@ -7,6 +7,7 @@ import { AccountService} from "../_services/account.service";
 
 @Component({ templateUrl: 'board.component.html' })
 export class BoardComponent implements OnInit {
+
   form!: FormGroup;
   id?: string;
   loading = false;
@@ -15,7 +16,8 @@ export class BoardComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
-    private accountService: AccountService
+    private accountService: AccountService,
+
     // private alertService: AlertService
   ) {}
 
@@ -48,15 +50,18 @@ export class BoardComponent implements OnInit {
         next: () => {
           //this.alertService.success('Board created', { keepAfterRouteChange: true });
           this.router.navigateByUrl('/');
+
         },
         error: error => {
           //this.alertService.error(error);
           this.loading = false;
         }
       })
+
   }
 
   private createBoard(title: string, userId: string) {
     return this.accountService.createBoard(title, userId);
   }
+
 }

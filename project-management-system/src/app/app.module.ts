@@ -14,6 +14,9 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { JwtInterceptor } from './_helpers/jwt.interceptor';
 import { ErrorInterceptor } from './_helpers/error.interceptor';
 import { ProfileComponent } from './profile/profile.component';
+import { BoardCardComponent } from './board-page/board-card/board-card.component';
+import { MatIconModule } from '@angular/material/icon';
+import {MatButtonModule} from "@angular/material/button";
 
 @NgModule({
   declarations: [
@@ -23,14 +26,17 @@ import { ProfileComponent } from './profile/profile.component';
     MainRouteComponent,
     BoardComponent,
     WelcomePageComponent,
-    ProfileComponent
+    ProfileComponent,
+    BoardCardComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    MatIconModule,
+    MatButtonModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
