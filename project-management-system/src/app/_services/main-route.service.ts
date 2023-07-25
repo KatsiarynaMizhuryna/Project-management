@@ -17,4 +17,5 @@ export class MainRouteService {
   delete(id: string) {
     return this.http.delete(`${environment.apiUrl}/boards/${id}`)
   }
+
 }

@@ -6,6 +6,7 @@ import { AuthGuard } from "./_helpers/auth.guard";
 import { WelcomePageComponent } from "./welcome-page/welcome-page.component";
 import {ProfileComponent} from "./profile/profile.component";
 import {BoardComponent} from "./board/board.component";
+import {BoardCardComponent} from "./board-page/board-card/board-card.component";
 
 
 const accountModule = () => import('./auth/account.module').then(x => x.AccountModule);
@@ -16,6 +17,7 @@ const routes: Routes = [
   { path: 'welcome-page', component: WelcomePageComponent},
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
   { path: 'board', component: BoardComponent, canActivate: [AuthGuard] },
+  { path: 'board-card', component: BoardCardComponent, canActivate: [AuthGuard] },
 
   // otherwise redirect to home
   { path: '**', redirectTo: '' }

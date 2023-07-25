@@ -43,5 +43,10 @@ export class BoardCardComponent implements OnInit {
         event.currentIndex);
     }
   }
+  addColumn(event: string) {
+    if (event) {
+      this.boardService.addColumn(event)
+    }
+  }
 
 }

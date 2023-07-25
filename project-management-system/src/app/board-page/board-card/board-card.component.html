@@ -1,3 +1,16 @@
+<div class="shadow  m-5 p-2">
+  <div class="flex justify-between items-center w-full">
+    <button mat-icon-button [routerLink]="'/new-board'">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <span class="text-2xl font-semi-bold"></span>
+    <div class="flex">
+      <app-add-new-element-dialog (emitText)="addColumn($event)" class="m-0.5" question="Add new column">
+        <button mat-raised-button class="px-4 py-2 bg-blue-500 text-white rounded-md">New Column</button>
+      </app-add-new-element-dialog>
+    </div>
+  </div>
+</div>
 <div class="container mx-auto">
   <div cdkDropListGroup class="flex">
     <div class="w-full sm:w-1/2 lg:w-1/4 m-3" *ngFor="let column of boardService.getBoard$() | async">
@@ -8,10 +21,9 @@
           <mat-icon class="text-2xl">delete</mat-icon>
         </button>
       </div>
-      <!-- Add New Card To Column
-      <app-dialog-main (emitText)="onAddCard($event, column.id)" [question]="'Add new card in ' + column.title + ' column'">
+      <app-add-new-element-dialog (emitText)="onAddCard($event, column.id)" [question]="'Add new card in ' + column.title + ' column'">
         <button  class="px-4 py-2 bg-gray-200 text-black rounded-md w-full mb-1">&#43;</button>
-      </app-dialog-main>-->
+      </app-add-new-element-dialog>
 
       <div cdkDropList [cdkDropListData]="column.list" class="example-list" (cdkDropListDropped)="drop($event)">
         <div cdkDrag class="example-box" [ngStyle]="{background: column.color}" *ngFor="let item of column.list">

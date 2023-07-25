@@ -1,7 +1,8 @@
 <h2>Hello {{user?.login}}! Your boards: </h2>
 <div class="flex gap-3 gap items-start flex-wrap p-6">
 <div *ngFor="let board of boards"
-     class="flex  p-2 shadow-sm bg-yellow-50 rounded border-gray-700">
+     [routerLink]="'/board-card'"
+     class="flex cursor-pointer p-2 shadow-sm bg-yellow-50 rounded border-gray-700">
   <h2 class="m-0">{{ board.title }}</h2>
   <button mat-icon-button class="icon-delete" (click)="deleteBoard(board._id)">
     <mat-icon class="text-2xl">delete</mat-icon>

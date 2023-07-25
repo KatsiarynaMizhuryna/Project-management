@@ -22,6 +22,8 @@ import {MatDialogModule} from "@angular/material/dialog";
 import { BoardItemComponent } from './board-page/board-item/board-item.component';
 import {MatInputModule} from "@angular/material/input";
 import {CdkDrag, CdkDropList, CdkDropListGroup} from "@angular/cdk/drag-drop";
+import { AddNewElementDialogComponent } from './board-page/add-new-element-dialog/add-new-element-dialog.component';
+import { AddNewElementDialogBodyComponent } from './board-page/add-new-element-dialog-body/add-new-element-dialog-body.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +36,9 @@ import {CdkDrag, CdkDropList, CdkDropListGroup} from "@angular/cdk/drag-drop";
     ProfileComponent,
     BoardCardComponent,
     DialogComponent,
-    BoardItemComponent
+    BoardItemComponent,
+    AddNewElementDialogComponent,
+    AddNewElementDialogBodyComponent
   ],
   imports: [
     BrowserModule,
