@@ -44,7 +44,6 @@ export class AccountService {
   }
 
   register(user: User) {
-    console.log(user)
     return this.http.post(`${environment.apiUrl}/auth/signup`, user);
   }
 
@@ -78,5 +77,9 @@ export class AccountService {
         }
         return x;
       }));
+  }
+
+  createBoard(title: string, userId: string) {
+    return this.http.post(`${environment.apiUrl}/boards`, {'title': title, 'owner': userId, 'users': []})
   }
 }
