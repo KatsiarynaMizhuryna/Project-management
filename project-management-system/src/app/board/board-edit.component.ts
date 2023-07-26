@@ -5,12 +5,11 @@ import { BoardServiceV2} from "../_services/board.service-v2";
 import { ModalService} from "../_services/modal.service";
 import { first } from "rxjs/operators";
 
-import { Column } from "../_models/Board";
-
 @Component({ templateUrl: 'board-edit.component.html' })
 export class BoardEditComponent implements OnInit {
   id?: string;
   columns?: any[];
+
   constructor(
     private route: ActivatedRoute,
     private boardService: BoardServiceV2,
@@ -25,10 +24,11 @@ export class BoardEditComponent implements OnInit {
       .subscribe(columns => this.columns = columns);
   }
 
-  addColumn() {
-    return this.boardService.createColumn(this.id!, 'some title', 0)
+  addColumn(event: string) {
+    return this.boardService.createColumn(this.id!, event, 0)
       .pipe(first())
-      .subscribe();
+      .subscribe((newColumn) => {
+        this.columns!.push(newColumn)})
   }
 
   deleteColumn(BoardId: string | undefined, ColumnId: string) {
