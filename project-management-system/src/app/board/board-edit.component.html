@@ -1,0 +1,21 @@
+<h2>Selected board: {{id}} </h2>
+<button (click)="addColumn()"
+        class="bg-green-500 hover:bg-green-700 text-white font-bold ml-5
+         py-2 px-4 rounded focus:outline-none focus:shadow-outline mb-2 md:mb-0 md:mr-2">
+  <span class="animate-spin  inline-block h-4  mr-2 border-t-2 border-b-2 border-white"></span>
+  Add column
+</button>
+<div class="flex gap-3 gap items-start overflow-auto p-6">
+  <div *ngFor="let column of columns"
+       class="flex-col  cursor-pointer p-2 shadow-sm bg-yellow-50 rounded border-gray-700">
+    <h2 class="m-0">{{ column._id }}</h2>
+    <div class="flex justify-between">
+      <h2 class="m-0">{{ column.title }}</h2>
+        <mat-icon class="text-2xl" (click)="deleteColumn(id, column._id)">delete</mat-icon>
+    </div>
+
+  <app-add-new-element-dialog>
+    <button  class="px-4 py-2 bg-gray-200 text-black rounded-md w-full mb-1">&#43;</button>
+  </app-add-new-element-dialog>
+  </div>
+</div>

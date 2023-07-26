@@ -78,8 +78,4 @@ export class AccountService {
         return x;
       }));
   }
-
-  createBoard(title: string, userId: string) {
-    return this.http.post(`${environment.apiUrl}/boards`, {'title': title, 'owner': userId, 'users': []})
-  }
 }

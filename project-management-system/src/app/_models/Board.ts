@@ -1,17 +1,18 @@
 export interface Board {
-  id?: number,
-  title: string,
-}
-export interface Card {
-  id: number,
-  text: string
+  id?: string,
+  title: string
 }
 
 export interface Column {
-  id: number,
+  id: string,
   title: string,
-  color: string,
-  list: Card[]
+  order: number,
+  boardId: string
+}
+
+export interface Card {
+  id: number,
+  text: string
 }
 
 export interface DialogData {

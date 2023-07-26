@@ -1,12 +1,14 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import {Card, Board, Column} from "../_models/Board";
+import  { environment } from "../../environments/environment";
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BoardService {
-  private initBoard = [
+  /*private initBoard = [
     {
       id: 1,
       title: 'To Do',
@@ -22,7 +24,8 @@ export class BoardService {
 
   private board: Column[] = this.initBoard
   private board$ = new BehaviorSubject<Column[]>(this.initBoard)
-
+  private apiUrl = environment.apiUrl
+  constructor(private http: HttpClient) {}
 
   getBoard$() {
     return this.board$.asObservable()
@@ -37,7 +40,7 @@ export class BoardService {
 
     this.board$.next([...this.board]);
   }
-  editCardText(cardId: number, columnId: number, newText: string) {
+  editCardText(cardId: number, columnId: string, newText: string) {
     this.board = this.board.map((column: Column) => {
       if (column.id === columnId) {
         column.list = column.list.map((card: Card) => {
@@ -52,7 +55,7 @@ export class BoardService {
 
     this.board$.next([...this.board]);
   }
-  addColumn(title: string) {
+  addColumn(id: number,title: string) {
     const newColumn: Column = {
       id: Date.now(),
       title: title,
@@ -60,8 +63,10 @@ export class BoardService {
       list: [],
     };
 
-    this.board = [...this.board, newColumn];
-    this.board$.next([...this.board]);
+    this.http.post(`${this.apiUrl}/boards/${id}/columns`, title ).subscribe(() => {
+      this.board = [...this.board, newColumn];
+      this.board$.next([...this.board]);
+    });
   }
 
   addCard(text: string, columnId: number) {
@@ -85,7 +90,7 @@ export class BoardService {
     this.board$.next([...this.board]);
   }
 
-  deleteCard(cardId: number, columnId: number) {
+  deleteCard(cardId: number, columnId: string) {
     this.board = this.board.map((column: Column) => {
       if (column.id === columnId) {
         column.list = column.list.filter((card: Card) => card.id !== cardId);
@@ -94,5 +99,5 @@ export class BoardService {
     });
 
     this.board$.next([...this.board]);
-  }
+  }*/
 }

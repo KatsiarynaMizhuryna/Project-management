@@ -1,11 +1,13 @@
+
+<!--
 <div class="shadow  m-5 p-2">
   <div class="flex justify-between items-center w-full">
-    <button mat-icon-button [routerLink]="'/main-route'">
+    <button mat-icon-button routerLink="/">
       <mat-icon>arrow_back</mat-icon>
     </button>
     <span class="text-2xl font-semi-bold"></span>
     <div class="flex">
-      <app-add-new-element-dialog (emitText)="addColumn($event)" class="m-0.5" question="Add new column">
+      <app-add-new-element-dialog (emitText)="addColumn(,$event)" class="m-0.5" question="Add new column">
         <button mat-raised-button class="px-4 py-2 bg-blue-500 text-white rounded-md">New Column</button>
       </app-add-new-element-dialog>
     </div>
@@ -13,9 +15,9 @@
 </div>
 <div class="container mx-auto">
   <div cdkDropListGroup class="flex">
-    <div class="w-full sm:w-1/2 lg:w-1/4 m-3" *ngFor="let column of boardService.getBoard$() | async">
+    <div class="w-full sm:w-1/2 lg:w-1/4 m-3" *ngFor="let column of boardService.getBoard$() | async"> -->
       <!-- Add Column title-->
-      <div class="flex justify-between items-center p-2 shadow-sm border-gray-300">
+<!--      <div class="flex justify-between items-center p-2 shadow-sm border-gray-300">
         <h2 class="m-0">{{column.title}}</h2>
         <button mat-icon-button class="icon-delete" (click)="onDeleteColumn(column.id)">
           <mat-icon class="text-2xl">delete</mat-icon>
@@ -40,4 +42,4 @@
     </div>
   </div>
 </div>
-
+-->

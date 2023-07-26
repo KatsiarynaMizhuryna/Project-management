@@ -8,7 +8,9 @@
       </mat-form-field>
     </div>
     <div mat-dialog-actions class="flex text-center">
-      <button mat-button color="primary" class="bg-blue-500 hover:bg-blue-700 text-white font-semi-bold py-2 px-4 rounded" [mat-dialog-close]="data.text" cdkFocusInitial >Confirm</button>
+      <button mat-button color="primary"
+              class="bg-blue-500 hover:bg-blue-700 text-white font-semi-bold py-2 px-4 rounded"
+              [mat-dialog-close]="data.text" cdkFocusInitial >Confirm</button>
       <button mat-button [style.color]="'gray'" (click)="onNoClick()">Cancel</button>
     </div>
   </div>

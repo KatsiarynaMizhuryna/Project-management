@@ -15,11 +15,11 @@ export class BoardCardComponent implements OnInit {
   ngOnInit(): void {
   }
   onAddCard(text: string, columnId: number) {
-    if(text) {
-      this.boardService.addCard(text, columnId)
-    }
+    //if(text) {
+      //this.boardService.addCard(text, columnId)
+    //}
   }
-
+/*
   onDeleteColumn(columnId: number) {
     this.boardService.deleteColumn(columnId)
   }
@@ -43,10 +43,10 @@ export class BoardCardComponent implements OnInit {
         event.currentIndex);
     }
   }
-  addColumn(event: string) {
+  addColumn(columnId: number, event: string) {
     if (event) {
-      this.boardService.addColumn(event)
+      this.boardService.addColumn(columnId, event)
     }
   }
-
+*/
 }

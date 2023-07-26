@@ -3,7 +3,8 @@ import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 
-import { AccountService} from "../_services/account.service";
+import { AccountService } from "../_services/account.service";
+import { BoardServiceV2 } from "../_services/board.service-v2";
 
 @Component({ templateUrl: 'board.component.html' })
 export class BoardComponent implements OnInit {
@@ -17,7 +18,7 @@ export class BoardComponent implements OnInit {
     private formBuilder: FormBuilder,
     private router: Router,
     private accountService: AccountService,
-
+    private boardService: BoardServiceV2
     // private alertService: AlertService
   ) {}
 
@@ -61,7 +62,7 @@ export class BoardComponent implements OnInit {
   }
 
   private createBoard(title: string, userId: string) {
-    return this.accountService.createBoard(title, userId);
+    return this.boardService.create(title, userId);
   }
 
 }

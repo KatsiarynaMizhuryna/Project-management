@@ -5,7 +5,7 @@
       <a *ngIf="!user" class="nav-item nav-link text-white" routerLink="/auth/signup" routerLinkActive="active">Sign up</a>
       <a *ngIf="user" class="nav-item nav-link text-white" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a>
       <a *ngIf="user" class="nav-item nav-link text-white" routerLink="/profile" routerLinkActive="active">Edit profile</a>
-      <a *ngIf="user" class="nav-item nav-link text-white" routerLink="/board" routerLinkActive="active">Create board</a>
+      <a *ngIf="user" class="nav-item nav-link text-white" routerLink="/boards/add" routerLinkActive="active">Create board</a>
     </div>
     <button *ngIf="user" class="mat-nav-list text-white" (click)="logout()">Logout</button>
   </div>

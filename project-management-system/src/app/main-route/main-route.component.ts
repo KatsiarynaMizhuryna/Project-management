@@ -1,26 +1,26 @@
 import {Component, OnInit} from '@angular/core';
-import { Board} from "../_models/Board";
 
 import { User} from "../_models/User";
 import { AccountService} from "../_services/account.service";
-import {MainRouteService} from "../_services/main-route.service";
 import { first} from "rxjs/operators";
 import { ModalService} from "../_services/modal.service";
+import {BoardServiceV2} from "../_services/board.service-v2";
 
 @Component({ templateUrl: 'main-route.component.html' })
 export class MainRouteComponent implements OnInit {
   user: User | null;
-  boards?: any [];
+  boards?: any[];
 
-
-  constructor(private accountService: AccountService,
-              private mainRouteService: MainRouteService,
-              private modalService: ModalService) {
+  constructor(
+    private accountService: AccountService,
+    private boardService: BoardServiceV2,
+    private modalService: ModalService)
+  {
     this.user = this.accountService.userValue;
   }
 
   ngOnInit() {
-    this.mainRouteService.getAllBoards()
+    this.boardService.getAll()
       .pipe(first())
       .subscribe(boards => this.boards = boards);
   }
@@ -28,10 +28,10 @@ export class MainRouteComponent implements OnInit {
   deleteBoard(id: string) {
     //const board = this.boards!.find(x => x._id === id);
     //board.isDeleting = true;
-    this.modalService.openConfirmDialog("Are you sure to delete this board ?").afterClosed()
+    this.modalService.openConfirmDialog("Delete this board ?").afterClosed()
       .subscribe(res => {
         if (res) {
-          this.mainRouteService.delete(id)
+          this.boardService.delete(id)
             .pipe(first())
             .subscribe(() => this.boards = this.boards!.filter(x => x._id !== id));
         }
