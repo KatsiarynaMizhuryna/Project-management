@@ -53,4 +53,8 @@ export class BoardServiceV2 {
     return this.http.post<Task>(`${environment.apiUrl}/boards/${boardId}/columns/${columnId}/tasks`,
       {'userId': userId, 'title': title, 'description': description, 'order': order, 'users': []});
   }
+
+  deleteTask(boardId: string | undefined, columnId: string, taskId: string ) {
+    return this.http.delete(`${environment.apiUrl}/boards/${boardId}/columns/${columnId}/tasks/${taskId}`);
+  }
 }

@@ -4,7 +4,7 @@ export interface Board {
 }
 
 export interface Column {
-  id: string;
+  _id: string;
   title: string;
   order: number;
   boardId: string;
@@ -12,7 +12,7 @@ export interface Column {
 }
 
 export interface Task {
-  id: string;
+  _id: string;
   title: string;
   order: number;
   boardId: string;

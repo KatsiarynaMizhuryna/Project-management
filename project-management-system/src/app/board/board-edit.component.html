@@ -27,7 +27,7 @@
         <h2 class="m-0">{{ task._id }}</h2>
         <div class="flex justify-between">
           <h2 class="m-0">{{ task.title }}</h2>
-          <mat-icon class="text-2xl">delete</mat-icon>
+          <mat-icon class="text-2xl" (click)="deleteTask(boardId, column._id, task._id)">delete</mat-icon>
         </div>
       </div>
     </div>

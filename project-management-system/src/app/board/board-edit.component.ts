@@ -6,14 +6,14 @@ import { ModalService } from "../_services/modal.service";
 import { first, map } from "rxjs/operators";
 import { User } from "../_models/User";
 import { AccountService } from "../_services/account.service";
-import { Column } from "../_models/Board";
+import { Column, Task } from "../_models/Board";
 
 @Component({ templateUrl: 'board-edit.component.html' })
 export class BoardEditComponent implements OnInit {
   user?: User | null;
   boardId?: string;
-  columns?: any[];
-  tasks?: any[];
+  columns?: Column[];
+  tasks?: Task[];
 
   constructor(
     private route: ActivatedRoute,
@@ -73,4 +73,21 @@ export class BoardEditComponent implements OnInit {
         this.columns![index].tasks.push(task);
       });
   }
+
+  deleteTask(BoardId: string | undefined, ColumnId: string, TaskId: string) {
+    this.modalService.openConfirmDialog("Delete this task ?").afterClosed()
+      .subscribe(res => {
+        if (res) {
+          this.boardService.deleteTask(BoardId, ColumnId, TaskId)
+            .pipe(first())
+            .subscribe(() => {
+              const columnIndex = this.columns!.findIndex(column => column._id === ColumnId);
+              if (columnIndex !== -1) {
+                this.columns![columnIndex].tasks = this.columns![columnIndex].tasks.filter(task => task._id !== TaskId);
+              }
+            });
+        }
+      })
+  }
+
 }
