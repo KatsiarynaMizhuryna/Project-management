@@ -1,4 +1,5 @@
-<h2>Selected board: {{id}} </h2>
+<h2>Selected board: {{boardId}} </h2>
+
 <app-add-new-element-dialog (emitText)="addColumn($event)" question="Add new column: ">
 <button
         class="bg-green-500 hover:bg-green-700 text-white font-bold ml-5
@@ -7,16 +8,28 @@
   Add column
 </button>
 </app-add-new-element-dialog>
+
 <div class="flex gap-3 gap items-start overflow-auto p-6">
   <div *ngFor="let column of columns"
-       class="flex-col  cursor-pointer p-2 shadow-sm bg-yellow-50 rounded border-gray-700">
+       class="flex-col cursor-pointer p-2 shadow-sm bg-yellow-50 rounded border-gray-700">
     <h2 class="m-0">{{ column._id }}</h2>
     <div class="flex justify-between">
       <h2 class="m-0">{{ column.title }}</h2>
-        <mat-icon class="text-2xl" (click)="deleteColumn(id, column._id)">delete</mat-icon>
+      <mat-icon class="text-2xl" (click)="deleteColumn(boardId, column._id)">delete</mat-icon>
     </div>
-  <app-add-new-element-dialog>
-    <button  class="px-4 py-2 bg-gray-200 text-black rounded-md w-full mb-1">&#43;</button>
-  </app-add-new-element-dialog>
+    <app-add-new-element-dialog (emitText)="addTask($event, column._id)"
+                                [question]="'Add new card in ' + column.title + ' column'">
+      <button class="px-4 py-2 bg-gray-200 text-black rounded-md w-64 mb-1">&#43;</button>
+    </app-add-new-element-dialog>
+    <div class="flex-col gap-3 gap items-start overflow-auto p-6">
+      <div *ngFor="let task of column.tasks"
+           class=" flex flex-col  cursor-pointer p-2 shadow-sm bg-yellow-50 rounded border-gray-700">
+        <h2 class="m-0">{{ task._id }}</h2>
+        <div class="flex justify-between">
+          <h2 class="m-0">{{ task.title }}</h2>
+          <mat-icon class="text-2xl">delete</mat-icon>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

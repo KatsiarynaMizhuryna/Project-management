@@ -1,12 +1,15 @@
-<nav class="bg-green-500 px-3">
-  <div class="flex items-center justify-between h-16">
-    <div class="flex gap-7 items-center">
-      <a *ngIf="!user" class="nav-item nav-link text-white" routerLink="/auth/login" routerLinkActive="active">Log in</a>
-      <a *ngIf="!user" class="nav-item nav-link text-white" routerLink="/auth/signup" routerLinkActive="active">Sign up</a>
-      <a *ngIf="user" class="nav-item nav-link text-white" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a>
-      <a *ngIf="user" class="nav-item nav-link text-white" routerLink="/profile" routerLinkActive="active">Edit profile</a>
-      <a *ngIf="user" class="nav-item nav-link text-white" routerLink="/boards/add" routerLinkActive="active">Create board</a>
-    </div>
-    <button *ngIf="user" class="mat-nav-list text-white" (click)="logout()">Logout</button>
-  </div>
-</nav>
+<div class=" flex justify-between items-center bg-green-500 px-3">
+  <div><a *ngIf="user" class="nav-item nav-link text-white text-3xl" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">PMA</a></div>
+    <nav >
+      <div class="flex items-center justify-end text-lg gap-3 h-16">
+        <div class="flex gap-7 items-center">
+          <a *ngIf="!user" class="nav-item nav-link text-white" routerLink="/auth/login" routerLinkActive="active">Log in</a>
+          <a *ngIf="!user" class="nav-item nav-link text-white" routerLink="/auth/signup" routerLinkActive="active">Sign up</a>
+          <a *ngIf="user" class="nav-item nav-link text-white" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a>
+          <a *ngIf="user" class="nav-item nav-link text-white" routerLink="/boards/add" routerLinkActive="active">Create board</a>
+          <a *ngIf="user" class="nav-item nav-link text-white" routerLink="/profile" routerLinkActive="active">Edit profile</a>
+         </div>
+         <button *ngIf="user" class="mat-nav-list text-white" (click)="logout()">Logout</button>
+       </div>
+     </nav>
+</div>

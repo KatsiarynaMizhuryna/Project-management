@@ -1,6 +1,8 @@
 import { Component,OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
+
+
 @Component({
   selector: 'app-add-new-element-dialog-body',
   templateUrl: './add-new-element-dialog-body.component.html',
@@ -12,7 +14,7 @@ export class AddNewElementDialogBodyComponent implements OnInit {
     public dialogRef: MatDialogRef<AddNewElementDialogBodyComponent>) {}
 
   onNoClick(): void {
-    this.dialogRef.close();
+    this.dialogRef.close(false);
   }
 
   ngOnInit(): void {

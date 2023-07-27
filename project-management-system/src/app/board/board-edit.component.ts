@@ -1,44 +1,76 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { BoardServiceV2} from "../_services/board.service-v2";
-import { ModalService} from "../_services/modal.service";
-import { first } from "rxjs/operators";
+import { BoardServiceV2 } from "../_services/board.service-v2";
+import { ModalService } from "../_services/modal.service";
+import { first, map } from "rxjs/operators";
+import { User } from "../_models/User";
+import { AccountService } from "../_services/account.service";
+import { Column } from "../_models/Board";
 
 @Component({ templateUrl: 'board-edit.component.html' })
 export class BoardEditComponent implements OnInit {
-  id?: string;
+  user?: User | null;
+  boardId?: string;
   columns?: any[];
+  tasks?: any[];
 
   constructor(
     private route: ActivatedRoute,
     private boardService: BoardServiceV2,
-    private modalService: ModalService
-  ) { }
-
-  ngOnInit() {
-    this.id = this.route.snapshot.params['id'];
-
-    this.boardService.getColumns(this.id!)
-      .pipe(first())
-      .subscribe(columns => this.columns = columns);
+    private modalService: ModalService,
+    private accountService: AccountService
+  ) {
+    this.user = this.accountService.userValue;
   }
 
-  addColumn(event: string) {
-    return this.boardService.createColumn(this.id!, event, 0)
+  ngOnInit() {
+    this.boardId = this.route.snapshot.params['id'];
+
+    this.boardService.getColumns(this.boardId!)
       .pipe(first())
-      .subscribe((newColumn) => {
-        this.columns!.push(newColumn)})
+      .subscribe(columns => {
+        this.columns = columns.map(column=> {
+          return { ...column, ...{tasks: []} };
+        })
+      });
+
+    this.boardService.getBoardTasks(this.boardId!)
+      .pipe(map(tasks => {
+        this.columns = this.columns!.map(column => {
+          const x = tasks.filter(x => x.columnId == column._id);
+          column.tasks.push(...x);
+          return column;
+        })
+        return tasks;
+      }))
+      .pipe(first())
+      .subscribe();
+  }
+
+  addColumn(title: string) {
+    return this.boardService.createColumn(this.boardId!, title, 0)
+      .pipe(first())
+      .subscribe(column => this.columns!.push({ ...column, ...{tasks: []} }));
   }
 
   deleteColumn(BoardId: string | undefined, ColumnId: string) {
     this.modalService.openConfirmDialog("Delete this column ?").afterClosed()
       .subscribe(res => {
         if (res) {
-          this.boardService.deleteColumn(BoardId,ColumnId)
+          this.boardService.deleteColumn(BoardId, ColumnId)
             .pipe(first())
             .subscribe(() => this.columns = this.columns!.filter(x => x._id !== ColumnId));
         }
       })
+  }
+
+  addTask(title: string,  ColumnId: string) {
+    return this.boardService.createTask(this.boardId!, ColumnId, this.user!.id!, title, 'add new task',0)
+      .pipe(first())
+      .subscribe(task => {
+        let index = this.columns!.map(column => column._id).indexOf(ColumnId);
+        this.columns![index].tasks.push(task);
+      });
   }
 }

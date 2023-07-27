@@ -2,9 +2,10 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { Board } from "../_models/Board";
-import { Column } from "../_models/Board";
+import { Column, Task } from "../_models/Board";
 
 import { environment } from "../../environments/environment";
+import {Observable} from "rxjs";
 
 @Injectable({ providedIn: 'root' })
 export class BoardServiceV2 {
@@ -33,10 +34,23 @@ export class BoardServiceV2 {
   }
 
   createColumn(boardId: string, title: string, order: number) {
-    return this.http.post(`${environment.apiUrl}/boards/${boardId}/columns`, {'title': title, 'order': order});
+    return this.http.post<Column>(`${environment.apiUrl}/boards/${boardId}/columns`, {'title': title, 'order': order});
   }
 
   deleteColumn(boardId: string | undefined, columnId: string ) {
     return this.http.delete(`${environment.apiUrl}/boards/${boardId}/columns/${columnId}`);
+  }
+
+  getTasks(boardId: string, columnId: string) {
+    return this.http.get<Task[]>(`${environment.apiUrl}/boards/${boardId}/columns/${columnId}/tasks`);
+  }
+
+  getBoardTasks(boardId: string) {
+    return this.http.get<Task[]>(`${environment.apiUrl}/tasksSet/${boardId}`);
+  }
+
+  createTask(boardId: string, columnId: string, userId: string, title: string, description: string, order: number) {
+    return this.http.post<Task>(`${environment.apiUrl}/boards/${boardId}/columns/${columnId}/tasks`,
+      {'userId': userId, 'title': title, 'description': description, 'order': order, 'users': []});
   }
 }

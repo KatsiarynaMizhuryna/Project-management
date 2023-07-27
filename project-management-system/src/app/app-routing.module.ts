@@ -18,6 +18,7 @@ const routes: Routes = [
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
   { path: 'boards/add', component: BoardComponent, canActivate: [AuthGuard] },
   { path: 'boards/edit/:id', component: BoardEditComponent, canActivate: [AuthGuard] },
+  { path: 'boards/edit/:id/:columnId', component: BoardEditComponent, canActivate: [AuthGuard] },
   { path: 'board-card', component: BoardCardComponent, canActivate: [AuthGuard] },
 
   // otherwise redirect to home

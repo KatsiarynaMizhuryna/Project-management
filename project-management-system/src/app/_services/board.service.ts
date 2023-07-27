@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import {Card, Board, Column} from "../_models/Board";
+import {Task, Board, Column} from "../_models/Board";
 import  { environment } from "../../environments/environment";
 import { HttpClient } from '@angular/common/http';
 

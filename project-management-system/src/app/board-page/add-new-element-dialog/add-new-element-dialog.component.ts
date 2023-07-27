@@ -21,7 +21,6 @@ export class AddNewElementDialogComponent implements OnInit {
       width: '400px',
       data: {question: this.question}
     });
-
     dialogRef.afterClosed().subscribe(result => {
       this.emitText.emit(result)
     });
