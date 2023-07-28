@@ -16,3 +16,13 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   color:green;
   width: 30px;
 }
+.box-1 {
+  transform: scale(1);
+  box-shadow: 0 0 5px 5px rgba(34, 60, 80, 0.2);
+  transition: box-shadow 0.5s, transform 0.5s;
+}
+.box-1:hover {
+  transform: scale(1.02);
+  box-shadow: 0 0 15px 7px rgba(34, 60, 80, 0.2);
+  transition: box-shadow 0.5s, transform 0.5s;
+}
