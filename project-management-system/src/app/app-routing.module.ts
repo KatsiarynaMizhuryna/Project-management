@@ -15,6 +15,7 @@ const routes: Routes = [
   { path: '', component: MainRouteComponent, canActivate: [AuthGuard] },
   { path: 'auth', loadChildren: accountModule },
   { path: 'welcome-page', component: WelcomePageComponent},
+  { path: 'main-route', component: MainRouteComponent },
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
   { path: 'boards/add', component: BoardComponent, canActivate: [AuthGuard] },
   { path: 'boards/edit/:id', component: BoardEditComponent, canActivate: [AuthGuard] },
