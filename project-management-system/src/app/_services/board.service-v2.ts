@@ -60,9 +60,13 @@ export class BoardServiceV2 {
   }
  ///boards/{boardId}/columns/{columnId}/tasks/{taskId}
   editTask(boardId: string | undefined, columnId: string, taskId: string, userId: string, title: string, description: string, order: number ) {
-    console.log('-------',title, description,'-------', userId, taskId)
-    return this.http.put(`${environment.apiUrl}/boards/${boardId}/columns/${columnId}/tasks/${taskId}`,
-      {'userId': userId, 'columnId': columnId, 'title': title, 'description': description, 'order': order, 'users': []})
+   return this.http.put(`${environment.apiUrl}/boards/${boardId}/columns/${columnId}/tasks/${taskId}`,
+     {'userId': userId, 'columnId': columnId, 'title': title, 'description': description, 'order': order, 'users': []})
+  }
+
+  editColumn(boardId: string | undefined, columnId: string, title: string, order: number ) {
+    return this.http.put(`${environment.apiUrl}/boards/${boardId}/columns/${columnId}`,
+      {'title': title, 'order': order})
 
   }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, Output, Input, EventEmitter} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import {MatDialog} from "@angular/material/dialog";
 import { BoardServiceV2 } from "../_services/board.service-v2";
@@ -16,6 +16,8 @@ export class BoardEditComponent implements OnInit {
   boardId?: string;
   columns?: Column[];
   tasks?: Task[];
+
+
 
   constructor(
     private route: ActivatedRoute,
@@ -100,4 +102,12 @@ export class BoardEditComponent implements OnInit {
      .subscribe((res) => {
        this.ngOnInit();}
      )}
+  editColumn(BoardId: string | undefined, ColumnId: string, TaskId: string, title: string, description: string){
+    return this.boardService.editColumn(BoardId, ColumnId, title,0)
+      .pipe(first())
+      .subscribe((res) => {
+        this.ngOnInit();}
+      )}
+
 }
+

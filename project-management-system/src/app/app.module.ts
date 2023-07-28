@@ -25,6 +25,7 @@ import { AddNewElementDialogComponent } from './board-page/add-new-element-dialo
 import { AddNewElementDialogBodyComponent } from './board-page/add-new-element-dialog-body/add-new-element-dialog-body.component';
 import {BoardEditComponent} from "./board/board-edit.component";
 import {EditTaskBodyComponent} from "./board-page/edit-task-body/edit-task-body.component";
+import {NgOptimizedImage} from "@angular/common";
 
 @NgModule({
   declarations: [
@@ -55,7 +56,8 @@ import {EditTaskBodyComponent} from "./board-page/edit-task-body/edit-task-body.
     FormsModule,
     CdkDropList,
     CdkDropListGroup,
-    CdkDrag
+    CdkDrag,
+    NgOptimizedImage
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
