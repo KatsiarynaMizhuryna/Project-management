@@ -17,6 +17,7 @@ export interface Task {
   order: number;
   boardId: string;
   columnId: string;
+  description: string;
 }
 
 export interface DialogData {

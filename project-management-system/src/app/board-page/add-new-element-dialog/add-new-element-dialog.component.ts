@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import {MatDialog} from "@angular/material/dialog";
 import { AddNewElementDialogBodyComponent} from "../add-new-element-dialog-body/add-new-element-dialog-body.component";
+import {FormGroup} from "@angular/forms";
 
 @Component({
   selector: 'app-add-new-element-dialog',
@@ -10,6 +11,8 @@ import { AddNewElementDialogBodyComponent} from "../add-new-element-dialog-body/
 export class AddNewElementDialogComponent implements OnInit {
   @Output() emitText: EventEmitter<any> = new EventEmitter()
   @Input() question: string = '';
+  @Input() title: string = '';
+
 
   constructor(public dialog: MatDialog) { }
 
@@ -19,7 +22,8 @@ export class AddNewElementDialogComponent implements OnInit {
   openDialog(): void {
     const dialogRef = this.dialog.open(AddNewElementDialogBodyComponent, {
       width: '400px',
-      data: {question: this.question}
+      data: {title: this.title,
+             question: this.question}
     });
     dialogRef.afterClosed().subscribe(result => {
       this.emitText.emit(result)

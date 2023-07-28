@@ -1,12 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-
+import {MatDialog} from "@angular/material/dialog";
 import { BoardServiceV2 } from "../_services/board.service-v2";
 import { ModalService } from "../_services/modal.service";
 import { first, map } from "rxjs/operators";
 import { User } from "../_models/User";
 import { AccountService } from "../_services/account.service";
 import { Column, Task } from "../_models/Board";
+import {EditTaskComponent} from "../board-page/edit-task/edit-task.component";
+import {NgForm} from "@angular/forms";
 
 @Component({ templateUrl: 'board-edit.component.html' })
 export class BoardEditComponent implements OnInit {
@@ -47,6 +49,7 @@ export class BoardEditComponent implements OnInit {
       .pipe(first())
       .subscribe();
   }
+
 
   addColumn(title: string) {
     return this.boardService.createColumn(this.boardId!, title, 0)
@@ -90,4 +93,11 @@ export class BoardEditComponent implements OnInit {
       })
   }
 
+//boardId: string, columnId: string, taskId: string, userId: string, title: string, description: string, order: number
+  editTask(BoardId: string | undefined, ColumnId: string, TaskId: string, title: string, description: string){
+      return this.boardService.editTask(BoardId, ColumnId, TaskId, this.user!.id!, title, description,0)
+     .pipe(first())
+     .subscribe((res) => {
+       this.ngOnInit();}
+     )}
 }

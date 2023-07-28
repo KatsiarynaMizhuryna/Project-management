@@ -1,19 +1,27 @@
 <div class="fixed bg-gray-300 bg-opacity-50 inset-0 flex items-center justify-center">
   <div class="bg-white overlay p-6 rounded-lg shadow-md">
-    <div mat-dialog-content class="text-gray-800" >
-      <h3 class="text-gray-800">{{data.question}}</h3>
+    <div mat-dialog-content class="text-gray-800">
+      <h3 class="text-gray-800">{{ data.question }}</h3>
       <div class="flex flex-col">
-      <mat-form-field>
-        <mat-label>Add Title</mat-label>
-        <input matInput [(ngModel)]="data.text">
-      </mat-form-field>
+        <mat-form-field [formGroup]="titleForm">
+          <mat-label>Add Title</mat-label>
+          <input matInput formControlName="text" required>
+          <mat-error *ngIf="titleForm.controls['text'].invalid && titleForm.controls['text'].touched">
+            Title is required.
+          </mat-error>
+        </mat-form-field>
       </div>
     </div>
     <div mat-dialog-actions class="flex text-center">
       <button mat-button color="primary"
-              class="bg-blue-500 hover:bg-blue-700 text-white font-semi-bold py-2 px-4 rounded"
-              [mat-dialog-close]="data.text" cdkFocusInitial >Confirm</button>
-      <button mat-button [style.color]="'gray'" (click)="onNoClick()">Cancel</button>
+              class="bg-green-500 hover:bg-green-700 text-white font-semi-bold py-2 px-4 rounded"
+              [mat-dialog-close]="titleForm.value.text"
+              [disabled]="titleForm.invalid"
+              cdkFocusInitial>
+        Confirm
+      </button>
+      <button mat-button (click)="onNoClick()">Cancel</button>
     </div>
   </div>
 </div>
+

@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
 import { MatDialog} from "@angular/material/dialog";
 import { DialogComponent} from "../dialog/dialog.component";
+import {
+  AddNewElementDialogBodyComponent
+} from "../board-page/add-new-element-dialog-body/add-new-element-dialog-body.component";
 
 @Injectable({
   providedIn: 'root'
@@ -20,4 +23,5 @@ export class ModalService {
       }
     });
   }
+
 }

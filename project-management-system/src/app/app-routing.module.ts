@@ -6,7 +6,7 @@ import { AuthGuard } from "./_helpers/auth.guard";
 import { WelcomePageComponent } from "./welcome-page/welcome-page.component";
 import { ProfileComponent } from "./profile/profile.component";
 import { BoardComponent } from "./board/board.component";
-import { BoardCardComponent } from "./board-page/board-card/board-card.component";
+import { EditTaskBodyComponent } from "./board-page/edit-task-body/edit-task-body.component";
 import { BoardEditComponent} from "./board/board-edit.component";
 
 const accountModule = () => import('./auth/account.module').then(x => x.AccountModule);
@@ -19,7 +19,7 @@ const routes: Routes = [
   { path: 'boards/add', component: BoardComponent, canActivate: [AuthGuard] },
   { path: 'boards/edit/:id', component: BoardEditComponent, canActivate: [AuthGuard] },
   { path: 'boards/edit/:id/:columnId', component: BoardEditComponent, canActivate: [AuthGuard] },
-  { path: 'board-card', component: BoardCardComponent, canActivate: [AuthGuard] },
+  { path: 'edit-task-body', component: EditTaskBodyComponent, canActivate: [AuthGuard] },
 
   // otherwise redirect to home
   { path: '**', redirectTo: '' }

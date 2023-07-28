@@ -50,11 +50,19 @@ export class BoardServiceV2 {
   }
 
   createTask(boardId: string, columnId: string, userId: string, title: string, description: string, order: number) {
+    console.log(userId)
     return this.http.post<Task>(`${environment.apiUrl}/boards/${boardId}/columns/${columnId}/tasks`,
       {'userId': userId, 'title': title, 'description': description, 'order': order, 'users': []});
   }
 
   deleteTask(boardId: string | undefined, columnId: string, taskId: string ) {
     return this.http.delete(`${environment.apiUrl}/boards/${boardId}/columns/${columnId}/tasks/${taskId}`);
+  }
+ ///boards/{boardId}/columns/{columnId}/tasks/{taskId}
+  editTask(boardId: string | undefined, columnId: string, taskId: string, userId: string, title: string, description: string, order: number ) {
+    console.log('-------',title, description,'-------', userId, taskId)
+    return this.http.put(`${environment.apiUrl}/boards/${boardId}/columns/${columnId}/tasks/${taskId}`,
+      {'userId': userId, 'columnId': columnId, 'title': title, 'description': description, 'order': order, 'users': []})
+
   }
 }

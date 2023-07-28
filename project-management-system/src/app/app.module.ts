@@ -14,17 +14,17 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { JwtInterceptor } from './_helpers/jwt.interceptor';
 import { ErrorInterceptor } from './_helpers/error.interceptor';
 import { ProfileComponent } from './profile/profile.component';
-//import { BoardCardComponent } from './board-page/board-card/board-card.component';
 import { MatIconModule } from '@angular/material/icon';
 import {MatButtonModule} from "@angular/material/button";
 import { DialogComponent } from './dialog/dialog.component';
 import {MatDialogModule} from "@angular/material/dialog";
-import { BoardItemComponent } from './board-page/board-item/board-item.component';
+import { EditTaskComponent} from "./board-page/edit-task/edit-task.component";
 import {MatInputModule} from "@angular/material/input";
 import {CdkDrag, CdkDropList, CdkDropListGroup} from "@angular/cdk/drag-drop";
 import { AddNewElementDialogComponent } from './board-page/add-new-element-dialog/add-new-element-dialog.component';
 import { AddNewElementDialogBodyComponent } from './board-page/add-new-element-dialog-body/add-new-element-dialog-body.component';
 import {BoardEditComponent} from "./board/board-edit.component";
+import {EditTaskBodyComponent} from "./board-page/edit-task-body/edit-task-body.component";
 
 @NgModule({
   declarations: [
@@ -35,10 +35,10 @@ import {BoardEditComponent} from "./board/board-edit.component";
     BoardComponent,
     WelcomePageComponent,
     ProfileComponent,
-    //BoardCardComponent,
+    EditTaskBodyComponent,
     BoardEditComponent,
     DialogComponent,
-    BoardItemComponent,
+    EditTaskComponent,
     AddNewElementDialogComponent,
     AddNewElementDialogBodyComponent
   ],

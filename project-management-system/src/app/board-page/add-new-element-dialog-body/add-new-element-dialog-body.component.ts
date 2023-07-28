@@ -1,7 +1,6 @@
 import { Component,OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-
-
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-add-new-element-dialog-body',
@@ -9,15 +8,19 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
   styleUrls: ['./add-new-element-dialog-body.component.css']
 })
 export class AddNewElementDialogBodyComponent implements OnInit {
+  titleForm!: FormGroup;
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
-    public dialogRef: MatDialogRef<AddNewElementDialogBodyComponent>) {}
+    public dialogRef: MatDialogRef<AddNewElementDialogBodyComponent>,
+    private formBuilder: FormBuilder) { }
 
   onNoClick(): void {
-    this.dialogRef.close(false);
+    this.dialogRef.close();
   }
 
   ngOnInit(): void {
+    this.titleForm = this.formBuilder.group({
+      text: ['', Validators.required],
+    });
   }
-
 }
