@@ -3,23 +3,23 @@
   <div class="px-4 py-6">
     <form [formGroup]="form" (ngSubmit)="onSubmit()">
       <div class="mb-4">
-        <label class="block text-gray-700 font-bold mb-2">Login</label>
+        <label class="block text-gray-700 font-bold mb-2">{{ 'LOGIN' | translate }}</label>
         <input type="text"
                formControlName="login"
                class="border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:border-green-500"
                [ngClass]="{ 'border-red-500': submitted && f['login'].errors }" />
         <div *ngIf="submitted && f['login'].errors" class="text-red-500 text-xs mt-1">
-          <div *ngIf="f['login'].errors?.['required']">Login is required</div>
+          <div *ngIf="f['login'].errors?.['required']">{{ 'VALID LOGIN' | translate }}</div>
         </div>
       </div>
       <div class="mb-4">
-        <label class="block text-gray-700 font-bold mb-2">Password</label>
+        <label class="block text-gray-700 font-bold mb-2">{{ 'PASSWORD' | translate }}</label>
         <input type="password"
                formControlName="password"
                class="border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:border-green-500"
                [ngClass]="{ 'border-red-500': submitted && f['password'].errors }" />
         <div *ngIf="submitted && f['password'].errors" class="text-red-500 text-xs mt-1">
-          <div *ngIf="f['password'].errors?.['required']">Password is required</div>
+          <div *ngIf="f['password'].errors?.['required']">{{ 'VALID PASSWORD' | translate }}</div>
         </div>
       </div>
       <div class="flex items-center justify-between">
@@ -27,10 +27,10 @@
                 class="bg-green-500 hover:bg-green-700 text-white font-bold py-2
                 px-4 rounded focus:outline-none focus:shadow-outline">
           <span *ngIf="loading" class="animate-spin inline-block h-4 w-4 mr-2 border-t-2 border-b-2 border-white"></span>
-          Login
+          {{ 'LOG IN' | translate }}
         </button>
         <a routerLink="../signup"
-           class="inline-block align-baseline font-bold text-sm text-green-500 hover:text-green-800">Sign up</a>
+           class="inline-block align-baseline font-bold text-sm text-green-500 hover:text-green-800">{{ 'SIGN UP' | translate }}</a>
       </div>
     </form>
   </div>

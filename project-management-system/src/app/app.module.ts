@@ -10,7 +10,7 @@ import { MainRouteComponent } from './main-route/main-route.component';
 import { BoardComponent } from './board/board.component';
 import { WelcomePageComponent } from './welcome-page/welcome-page.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import {HttpClientModule, HTTP_INTERCEPTORS, HttpClient} from '@angular/common/http';
 import { JwtInterceptor } from './_helpers/jwt.interceptor';
 import { ErrorInterceptor } from './_helpers/error.interceptor';
 import { ProfileComponent } from './profile/profile.component';
@@ -26,6 +26,14 @@ import { AddNewElementDialogBodyComponent } from './board-page/add-new-element-d
 import {BoardEditComponent} from "./board/board-edit.component";
 import {EditTaskBodyComponent} from "./board-page/edit-task-body/edit-task-body.component";
 import {NgOptimizedImage} from "@angular/common";
+import {TranslationModule} from "./translation/translation.module";
+import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+
+
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+}
 
 @NgModule({
   declarations: [
@@ -57,7 +65,15 @@ import {NgOptimizedImage} from "@angular/common";
     CdkDropList,
     CdkDropListGroup,
     CdkDrag,
-    NgOptimizedImage
+    NgOptimizedImage,
+    TranslationModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient],
+      },
+    }),
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
@@ -65,4 +81,8 @@ import {NgOptimizedImage} from "@angular/common";
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+  constructor(private translate: TranslateService) {
+    this.translate.getTranslation('en').subscribe();
+  }
+}

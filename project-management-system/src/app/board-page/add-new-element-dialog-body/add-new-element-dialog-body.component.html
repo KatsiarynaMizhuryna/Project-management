@@ -4,10 +4,10 @@
       <h3 class="text-gray-800">{{ data.question }}</h3>
       <div class="flex flex-col">
         <mat-form-field [formGroup]="titleForm">
-          <mat-label>Add Title</mat-label>
+          <mat-label>{{ 'ADD TITLE' | translate }}</mat-label>
           <input matInput formControlName="text" required>
           <mat-error *ngIf="titleForm.controls['text'].invalid && titleForm.controls['text'].touched">
-            Title is required.
+            {{ 'VALID TITLE' | translate }}
           </mat-error>
         </mat-form-field>
       </div>
@@ -18,9 +18,9 @@
               [mat-dialog-close]="titleForm.value.text"
               [disabled]="titleForm.invalid"
               >
-        Confirm
+        {{ 'CONFIRM' | translate }}
       </button>
-      <button mat-button (click)="onNoClick()">Cancel</button>
+      <a routerLink="/" (click)="onNoClick()">{{ 'CANCEL' | translate }}</a>
     </div>
   </div>
 </div>

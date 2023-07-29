@@ -25,6 +25,7 @@ export class EditTaskComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
     if (this.editData) {
       this.taskForm.patchValue({
         title: this.editData.title,

@@ -8,7 +8,7 @@ import { User } from "../_models/User";
 import { AccountService } from "../_services/account.service";
 import { Column, Task } from "../_models/Board";
 import {EditTaskComponent} from "../board-page/edit-task/edit-task.component";
-import {NgForm} from "@angular/forms";
+import { TranslateService} from "@ngx-translate/core";
 
 @Component({ templateUrl: 'board-edit.component.html' })
 export class BoardEditComponent implements OnInit {
@@ -16,20 +16,29 @@ export class BoardEditComponent implements OnInit {
   boardId?: string;
   columns?: Column[];
   tasks?: Task[];
+  deleteCol?: string;
+  deleteTas?: string;
 
-
-
-  constructor(
+constructor(
     private route: ActivatedRoute,
     private boardService: BoardServiceV2,
     private modalService: ModalService,
-    private accountService: AccountService
+    private accountService: AccountService,
+    private translate: TranslateService
   ) {
     this.user = this.accountService.userValue;
   }
 
   ngOnInit() {
     this.boardId = this.route.snapshot.params['id'];
+
+    this.translate.get('DELETE COLUMN').subscribe((translation: string) => {
+      this.deleteCol = translation;
+    });
+
+    this.translate.get('DELETE TASK').subscribe((translation: string) => {
+      this.deleteTas = translation;
+    });
 
     this.boardService.getColumns(this.boardId!)
       .pipe(first())
@@ -60,7 +69,7 @@ export class BoardEditComponent implements OnInit {
   }
 
   deleteColumn(BoardId: string | undefined, ColumnId: string) {
-    this.modalService.openConfirmDialog("Delete this column ?").afterClosed()
+    this.modalService.openConfirmDialog(this.deleteCol!).afterClosed()
       .subscribe(res => {
         if (res) {
           this.boardService.deleteColumn(BoardId, ColumnId)
@@ -80,7 +89,7 @@ export class BoardEditComponent implements OnInit {
   }
 
   deleteTask(BoardId: string | undefined, ColumnId: string, TaskId: string) {
-    this.modalService.openConfirmDialog("Delete this task ?").afterClosed()
+    this.modalService.openConfirmDialog(this.deleteTas!).afterClosed()
       .subscribe(res => {
         if (res) {
           this.boardService.deleteTask(BoardId, ColumnId, TaskId)

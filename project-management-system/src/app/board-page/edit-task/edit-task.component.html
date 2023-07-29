@@ -4,17 +4,17 @@
       <h3 class="text-gray-800">{{ editData.question }}</h3>
       <div class="flex flex-col" [formGroup]="taskForm">
         <mat-form-field >
-          <mat-label>Edit Title</mat-label>
+          <mat-label>{{ 'EDIT TITLE' | translate }}</mat-label>
           <input matInput formControlName="title" required>
           <mat-error *ngIf="taskForm.controls['title'].invalid && taskForm.controls['title'].touched">
-            Title is required.
+            {{ 'VALID TITLE' | translate }}
           </mat-error>
         </mat-form-field>
         <mat-form-field >
-          <mat-label>Edit Description</mat-label>
+          <mat-label>{{ 'EDIT DESCRIPTION' | translate }}</mat-label>
           <input matInput formControlName="description" required>
           <mat-error *ngIf="taskForm.controls['description'].invalid && taskForm.controls['description'].touched">
-            Description is required.
+            {{ 'VALID DESCRIPTION' | translate }}
           </mat-error>
         </mat-form-field>
       </div>
@@ -24,9 +24,9 @@
               class="bg-green-500 hover:bg-green-700 text-white font-semi-bold py-2 px-4 rounded"
               [mat-dialog-close]="taskForm.value"
               [disabled]="taskForm.invalid">
-        Confirm
+        {{ 'CONFIRM' | translate }}
       </button>
-      <button mat-button (click)="onNoClick()">Cancel</button>
+      <button mat-button (click)="onNoClick()">{{ 'CANCEL' | translate }}</button>
     </div>
   </div>
 </div>

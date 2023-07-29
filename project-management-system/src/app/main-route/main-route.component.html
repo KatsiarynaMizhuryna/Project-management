@@ -1,5 +1,5 @@
 <div class="ml-5 mr-5">
-  <h2 class="board-heading">Hello, {{ user?.login }}! Your boards:</h2>
+  <h2 class="board-heading">{{ 'HELLO' | translate }},  {{ user?.login }}! {{ 'BOARDS' | translate }} </h2>
 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 m-6">
   <div *ngFor="let board of boards" routerLink="/boards/edit/{{ board._id }}"
        class="flex justify-between p-4 rounded-md cursor-pointer

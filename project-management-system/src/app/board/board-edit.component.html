@@ -1,14 +1,14 @@
-<h2 class="board-heading text-center">Selected board: {{boardId}} </h2>
+<h2 class="board-heading text-center">{{ 'SELECTED' | translate }}: {{boardId}} </h2>
 <div class="flex gap-6 justify-center">
   <button mat-icon-button [routerLink]="'/main-route'" >
   <mat-icon class="green-color" >arrow_back</mat-icon>
 </button>
-  <app-add-new-element-dialog (emitText)="addColumn($event)" question="Add new column: ">
+  <app-add-new-element-dialog (emitText)="addColumn($event)" [question]="('ADD NEW COLUMN' | translate)">
 <button class="bg-gradient-to-r from-green-400 to-blue-500
         shadow-lg hover:shadow-xl transition-shadow duration-300 text-white font-semi-bold ml-5
          py-2 px-4 rounded mb-2 md:mb-0 md:mr-2">
   <span class="animate-spin  inline-block h-4  mr-2 border-t-2 border-b-2 border-white"></span>
-  Add column
+  {{ 'ADD COLUMN' | translate }}
 </button>
 </app-add-new-element-dialog>
 </div>
@@ -21,7 +21,7 @@
     </div>
     <app-add-new-element-dialog
       (emitText)="addTask($event, column._id)"
-      [question]="'Add new card in ' + column.title + ' column'">
+      [question]="('ADD NEW TASK' | translate)  + column.title +  ('COLUMN' | translate)">
       <button class=" flex justify-center items-center w-full px-4 py-2
       bg-gray-200 text-black rounded-md mb-1"><mat-icon>library_add</mat-icon></button>
     </app-add-new-element-dialog>
@@ -35,7 +35,7 @@
           <div class="flex gap-3 items-center p-2">
           <app-edit-task-body
             (emitText)="editTask(boardId, column._id, task._id, $event.title, $event.description)"
-            [question]="'Edit task: '" [title]="task.title" [description]="task.description" [id]="task._id" >
+            [question]="('EDIT TASK' | translate)"  [title]="task.title" [description]="task.description" [id]="task._id" >
             <mat-icon class="text-center">edit</mat-icon>
           </app-edit-task-body>
              <mat-icon  color="warn" class="text-center" (click)="deleteTask(boardId, column._id, task._id)">delete</mat-icon>
