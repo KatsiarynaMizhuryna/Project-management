@@ -30,7 +30,6 @@ export class ProfileComponent implements OnInit {
     });
 
     if (this.id) {
-      // edit mode
       this.loading = true;
       this.accountService.getById(this.id)
         .pipe(first())
@@ -45,13 +44,10 @@ export class ProfileComponent implements OnInit {
 
   onSubmit() {
     this.submitted = true;
-
     this.alertService.clear();
-
     if (this.form.invalid) {
       return;
     }
-
     this.submitting = true;
     this.saveUser()
       .pipe(first())
@@ -69,7 +65,6 @@ export class ProfileComponent implements OnInit {
   }
 
   private saveUser() {
-    // update user
     return this.accountService.update(this.id!, this.form.value);
   }
 

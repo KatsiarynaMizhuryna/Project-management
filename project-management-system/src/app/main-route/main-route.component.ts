@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 
-import { User} from "../_models/User";
 import { AccountService} from "../_services/account.service";
 import { first} from "rxjs/operators";
 import { ModalService} from "../_services/modal.service";
@@ -26,8 +25,6 @@ export class MainRouteComponent implements OnInit {
   }
 
   deleteBoard(id: string) {
-    //const board = this.boards!.find(x => x._id === id);
-    //board.isDeleting = true;
     this.modalService.openConfirmDialog("Delete this board ?").afterClosed()
       .subscribe(res => {
         if (res) {

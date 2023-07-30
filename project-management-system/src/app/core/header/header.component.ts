@@ -3,7 +3,6 @@ import { AccountService} from "../../_services/account.service";
 import { User} from "../../_models/User";
 import { LanguageService} from "../../_services/language.service";
 
-
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',

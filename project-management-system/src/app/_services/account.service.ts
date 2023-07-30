@@ -29,7 +29,6 @@ export class AccountService {
       .pipe(map(data => {
         const user = JSON.parse(atob(data.token!.split('.')[1]));
         user.token = data.token;
-        // store user details and jwt token in local storage to keep user logged in between page refreshes
         localStorage.setItem('user', JSON.stringify(user));
         this.userSubject.next(user);
         return user;
@@ -37,7 +36,6 @@ export class AccountService {
   }
 
   logout() {
-    // remove user from local storage and set current user to null
     localStorage.removeItem('user');
     this.userSubject.next(null);
     this.router.navigate(['/welcome-page']);
@@ -59,10 +57,8 @@ export class AccountService {
     return this.http.put(`${environment.apiUrl}/users/${id}`, params)
       .pipe(map(x => {
         if (id == this.userValue?.id) {
-          // update local storage
           const user = { ...this.userValue, ...params };
           localStorage.setItem('user', JSON.stringify(user));
-          // publish updated user to subscribers
           this.userSubject.next(user);
         }
         return x;

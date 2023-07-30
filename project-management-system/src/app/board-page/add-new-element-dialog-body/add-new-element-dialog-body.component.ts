@@ -14,9 +14,6 @@ export class AddNewElementDialogBodyComponent implements OnInit {
     public dialogRef: MatDialogRef<AddNewElementDialogBodyComponent>,
     private formBuilder: FormBuilder) { }
 
-  onNoClick(): void {
-    this.dialogRef.close(false);
-  }
 
   ngOnInit(): void {
     this.titleForm = this.formBuilder.group({

@@ -4,7 +4,6 @@ import { Subscription } from 'rxjs';
 import { Alert, AlertType} from "../../_models/alert";
 import { AlertService} from "../../_services/alert.service";
 
-
 @Component({
   selector: 'alert',
   templateUrl: 'alert.component.html'
@@ -82,7 +81,6 @@ export class AlertComponent implements OnInit, OnDestroy {
     if (alert.fade) {
       classes.push('transition-opacity', 'duration-500', 'opacity-0', 'hover:opacity-100');
     }
-
     return classes.join(' ');
   }
 }

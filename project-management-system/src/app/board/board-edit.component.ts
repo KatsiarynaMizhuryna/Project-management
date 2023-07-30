@@ -1,13 +1,12 @@
-import { Component, OnInit, Output, Input, EventEmitter} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import {MatDialog} from "@angular/material/dialog";
 import { BoardServiceV2 } from "../_services/board.service-v2";
 import { ModalService } from "../_services/modal.service";
 import { first, map } from "rxjs/operators";
 import { User } from "../_models/User";
 import { AccountService } from "../_services/account.service";
-import { Column, Task } from "../_models/Board";
-import {EditTaskComponent} from "../board-page/edit-task/edit-task.component";
+import { Column } from "../_models/Board";
+
 import { TranslateService} from "@ngx-translate/core";
 
 @Component({ templateUrl: 'board-edit.component.html' })
@@ -30,15 +29,12 @@ constructor(
 
   ngOnInit() {
     this.boardId = this.route.snapshot.params['id'];
-
     this.translate.stream('DELETE COLUMN').subscribe((translation: string) => {
       this.deleteCol = translation;
     });
-
     this.translate.stream('DELETE TASK').subscribe((translation: string) => {
       this.deleteTas = translation;
     });
-
     this.boardService.getColumns(this.boardId!)
       .pipe(first())
       .subscribe(columns => {
@@ -46,7 +42,6 @@ constructor(
           return { ...column, ...{tasks: []} };
         })
       });
-
     this.boardService.getBoardTasks(this.boardId!)
       .pipe(map(tasks => {
         this.columns = this.columns!.map(column => {
@@ -59,7 +54,6 @@ constructor(
       .pipe(first())
       .subscribe();
   }
-
 
   addColumn(title: string) {
     return this.boardService.createColumn(this.boardId!, title, 0)
@@ -103,7 +97,6 @@ constructor(
       })
   }
 
-//boardId: string, columnId: string, taskId: string, userId: string, title: string, description: string, order: number
   editTask(BoardId: string | undefined, ColumnId: string, TaskId: string, title: string, description: string){
       return this.boardService.editTask(BoardId, ColumnId, TaskId, this.user!.id!, title, description,0)
      .pipe(first())
@@ -116,6 +109,4 @@ constructor(
       .subscribe((res) => {
         this.ngOnInit();}
       )}
-
 }
-

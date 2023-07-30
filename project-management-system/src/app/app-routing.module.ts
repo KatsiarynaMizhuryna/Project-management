@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-
 import { MainRouteComponent } from "./main-route/main-route.component";
 import { AuthGuard } from "./_helpers/auth.guard";
 import { WelcomePageComponent } from "./welcome-page/welcome-page.component";
