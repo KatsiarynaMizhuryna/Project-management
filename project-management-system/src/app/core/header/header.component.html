@@ -1,11 +1,11 @@
-<div class=" flex justify-between items-center bg-green-500 mb-5 px-3">
+<div class=" flex header justify-between items-center bg-green-500 mb-5 px-3">
   <div class=" flex gap-5 justify-between items-center">
     <img src="assets/images/logo.png" alt="app-logo" width="30" height="30">
     <a class="nav-item nav-link text-white text-3xl" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">PMA</a>
   </div>
   <select
     [(ngModel)]="selectedLanguage" (ngModelChange)="switchLanguage(selectedLanguage)"
-     class="block mt-1 py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:ring focus:ring-opacity-50 focus:ring-blue-300 focus:border-blue-300">
+     class="block mt-1 py-2 px-3 border border-gray-200 bg-white rounded-md shadow-sm focus:ring focus:ring-opacity-50 focus:ring-blue-300 focus:border-blue-300">
     <option value="en" class="text-gray-900">English</option>
     <option value="ru" class="text-gray-900">Russian</option>
   </select>

@@ -12,10 +12,10 @@
 </button>
 </app-add-new-element-dialog>
 </div>
-<div class="flex gap-3 m-6 overflow-auto rounded shadow-sm">
+<div class="flex gap-3 m-6  rounded shadow-sm">
   <div *ngFor="let column of columns"
-       class=" flex w-80 flex-col cursor-pointer shadow-sm bg-yellow-50 rounded">
-    <div class="flex bg-gray-200 justify-between p-2 mb-2 ">
+       class=" flex flex-col cursor-pointer shadow-sm bg-yellow-50 column-section rounded">
+    <div class="flex bg-gray-200 justify-between p-2 mb-2">
       <h2 class=" text-gray-800 text-semi-bold">{{ column.title | titlecase }}</h2>
       <mat-icon class="text-2xl" (click)="deleteColumn(boardId, column._id)">delete</mat-icon>
     </div>
@@ -25,7 +25,7 @@
       <button class=" flex justify-center items-center w-full px-4 py-2
       bg-gray-200 text-black rounded-md mb-1"><mat-icon>library_add</mat-icon></button>
     </app-add-new-element-dialog>
-    <div class="p-2">
+    <div class="p-2 column ">
       <div *ngFor="let task of column.tasks"
            class=" flex flex-col mb-5 cursor-pointer
           bg-white box-1 rounded-lg p-4">
@@ -46,4 +46,5 @@
     </div>
   </div>
 </div>
+
 

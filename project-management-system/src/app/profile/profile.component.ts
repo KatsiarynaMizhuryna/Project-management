@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 
 import { AccountService} from "../_services/account.service";
+import { AlertService} from "../_services/alert.service";
 
 @Component({ templateUrl: 'profile.component.html' })
 export class ProfileComponent implements OnInit {
@@ -16,13 +17,12 @@ export class ProfileComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
-    private accountService: AccountService
-   // private alertService: AlertService
+    private accountService: AccountService,
+    private alertService: AlertService
   ) {}
 
   ngOnInit() {
     this.id = this.accountService.userValue?.id;
-    // form with validation rules
     this.form = this.formBuilder.group({
       name: ['', Validators.required],
       login: ['', Validators.required],
@@ -41,16 +41,13 @@ export class ProfileComponent implements OnInit {
     }
   }
 
-  // convenience getter for easy access to form fields
   get f() { return this.form.controls; }
 
   onSubmit() {
     this.submitted = true;
 
-    // reset alerts on submit
-    //this.alertService.clear();
+    this.alertService.clear();
 
-    // stop here if form is invalid
     if (this.form.invalid) {
       return;
     }
@@ -60,11 +57,12 @@ export class ProfileComponent implements OnInit {
       .pipe(first())
       .subscribe({
         next: () => {
-          //this.alertService.success('User saved', { keepAfterRouteChange: true });
+          this.alertService.success('User saved',
+            { keepAfterRouteChange: true, autoClose: true });
           this.router.navigateByUrl('/');
         },
         error: error => {
-          //this.alertService.error(error);
+          this.alertService.error(error);
           this.submitting = false;
         }
       })

@@ -29,6 +29,7 @@ import {NgOptimizedImage} from "@angular/common";
 import {TranslationModule} from "./translation/translation.module";
 import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { AlertComponent } from './core/alert/alert.component';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -49,7 +50,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     DialogComponent,
     EditTaskComponent,
     AddNewElementDialogComponent,
-    AddNewElementDialogBodyComponent
+    AddNewElementDialogBodyComponent,
+    AlertComponent
   ],
   imports: [
     BrowserModule,
@@ -73,6 +75,7 @@ export function HttpLoaderFactory(http: HttpClient) {
         useFactory: HttpLoaderFactory,
         deps: [HttpClient],
       },
+      defaultLanguage: 'en'
     }),
   ],
   providers: [
@@ -83,6 +86,6 @@ export function HttpLoaderFactory(http: HttpClient) {
 })
 export class AppModule {
   constructor(private translate: TranslateService) {
-    this.translate.getTranslation('en').subscribe();
+    this.translate.setDefaultLang('en');
   }
 }

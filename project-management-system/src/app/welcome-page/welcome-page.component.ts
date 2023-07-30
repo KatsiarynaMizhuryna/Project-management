@@ -15,5 +15,7 @@ export class WelcomePageComponent implements OnInit{
     if (user) {
       this.router.navigateByUrl('/');
     }
+
+
   }
 }

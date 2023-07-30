@@ -2,8 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
+import { TranslateService } from '@ngx-translate/core';
 
 import { AccountService} from "../../_services/account.service";
+import { AlertService} from "../../_services/alert.service";
 
 @Component({
   selector: 'app-signup',
@@ -20,6 +22,8 @@ export class SignupComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private accountService: AccountService,
+    private alertService: AlertService,
+    private translate: TranslateService
   ) { }
 
   ngOnInit() {
@@ -28,13 +32,16 @@ export class SignupComponent implements OnInit {
       login: ['', Validators.required],
       password: ['', [Validators.required, Validators.minLength(6)]]
     });
+    this.translate.onLangChange.subscribe();
   }
 
-  // convenience getter for easy access to form fields
   get f() { return this.form.controls; }
 
   onSubmit() {
     this.submitted = true;
+
+    this.alertService.clear();
+
     if (this.form.invalid) {
       return;
     }
@@ -44,11 +51,12 @@ export class SignupComponent implements OnInit {
       .pipe(first())
       .subscribe({
         next: () => {
-          alert('Registration successful');
+          this.alertService.success('Registration successful',
+            { keepAfterRouteChange: true, autoClose: true });
           this.router.navigate(['../login'], { relativeTo: this.route });
         },
         error: error => {
-          alert('Error');
+          this.alertService.error(error, { autoClose: true });
           this.loading = false;
         }
       });

@@ -16,11 +16,12 @@
       <button mat-button color="primary"
               class="bg-green-500 hover:bg-green-700 text-white font-semi-bold py-2 px-4 rounded"
               [mat-dialog-close]="titleForm.value.text"
-              [disabled]="titleForm.invalid"
-              >
-        {{ 'CONFIRM' | translate }}
+              [disabled]="titleForm.invalid">
+        {{ 'CONFIRM' | translate }}</button>
+      <button mat-button color="primary"  mat-dialog-close
+              class="text-white font-semi-bold py-2 px-4 rounded">
+        {{ 'CANCEL' | translate }}
       </button>
-      <a routerLink="/" (click)="onNoClick()">{{ 'CANCEL' | translate }}</a>
     </div>
   </div>
 </div>

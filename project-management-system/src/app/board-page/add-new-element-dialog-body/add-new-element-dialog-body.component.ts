@@ -15,7 +15,7 @@ export class AddNewElementDialogBodyComponent implements OnInit {
     private formBuilder: FormBuilder) { }
 
   onNoClick(): void {
-    this.dialogRef.close();
+    this.dialogRef.close(false);
   }
 
   ngOnInit(): void {

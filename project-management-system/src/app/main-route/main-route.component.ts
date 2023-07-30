@@ -8,7 +8,7 @@ import {BoardServiceV2} from "../_services/board.service-v2";
 
 @Component({ templateUrl: 'main-route.component.html' })
 export class MainRouteComponent implements OnInit {
-  user: User | null;
+  user: any;
   boards?: any[];
 
   constructor(
@@ -20,7 +20,7 @@ export class MainRouteComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.boardService.getAll()
+    this.boardService.getById(this.user.id)
       .pipe(first())
       .subscribe(boards => this.boards = boards);
   }

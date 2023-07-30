@@ -5,6 +5,7 @@ import { first } from 'rxjs/operators';
 
 import { AccountService } from "../_services/account.service";
 import { BoardServiceV2 } from "../_services/board.service-v2";
+import { AlertService} from "../_services/alert.service";
 
 @Component({ templateUrl: 'board.component.html' })
 export class BoardComponent implements OnInit {
@@ -18,28 +19,24 @@ export class BoardComponent implements OnInit {
     private formBuilder: FormBuilder,
     private router: Router,
     private accountService: AccountService,
-    private boardService: BoardServiceV2
-    // private alertService: AlertService
+    private boardService: BoardServiceV2,
+    private alertService: AlertService
   ) {}
 
   ngOnInit() {
     this.id = this.accountService.userValue?.id;
-    // form with validation rules
     this.form = this.formBuilder.group({
       title: ['', Validators.required]
     });
   }
 
-  // convenience getter for easy access to form fields
   get f() { return this.form.controls; }
 
   onSubmit() {
     this.submitted = true;
 
-    // reset alerts on submit
-    //this.alertService.clear();
+    this.alertService.clear();
 
-    // stop here if form is invalid
     if (this.form.invalid) {
       return;
     }
@@ -49,20 +46,18 @@ export class BoardComponent implements OnInit {
       .pipe(first())
       .subscribe({
         next: () => {
-          //this.alertService.success('Board created', { keepAfterRouteChange: true });
+          this.alertService.success('Board created', { keepAfterRouteChange: true, autoClose: true });
           this.router.navigateByUrl('/');
 
         },
         error: error => {
-          //this.alertService.error(error);
+          this.alertService.error(error);
           this.loading = false;
         }
       })
-
   }
 
   private createBoard(title: string, userId: string) {
     return this.boardService.create(title, userId);
   }
-
 }

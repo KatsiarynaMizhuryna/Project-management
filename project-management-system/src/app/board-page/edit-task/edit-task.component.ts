@@ -1,4 +1,4 @@
-import {Component, OnInit, Input, Output, EventEmitter, Inject} from '@angular/core';
+import {Component, OnInit, Inject} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 
@@ -18,10 +18,6 @@ export class EditTaskComponent implements OnInit {
       title: ['', Validators.required],
       description: ['', Validators.required]
     });
-  }
-
-  onNoClick(): void {
-    this.dialogRef.close();
   }
 
   ngOnInit(): void {

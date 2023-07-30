@@ -21,8 +21,8 @@ export class BoardServiceV2 {
     return this.http.get<Board[]>(`${environment.apiUrl}/boards`);
   }
 
-  getById(id: string) {
-    return this.http.get(`${environment.apiUrl}/boards/${id}`);
+  getById(userId: string) {
+    return this.http.get<Board[]>(`${environment.apiUrl}/boardsSet/${userId}`);
   }
 
   delete(id: string) {

@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 import { AccountService} from "../../_services/account.service";
+import { AlertService} from "../../_services/alert.service";
 
 @Component({
   selector: 'app-login',
@@ -18,7 +19,8 @@ export class LoginComponent implements OnInit {
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private accountService: AccountService
+    private accountService: AccountService,
+    private alertService: AlertService
   ) { }
 
   ngOnInit() {
@@ -28,12 +30,13 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  // convenience getter for easy access to form fields
-  get f() { return this.form.controls; }
+   get f() { return this.form.controls; }
 
   onSubmit() {
     this.submitted = true;
-    // stop here if form is invalid
+
+    this.alertService.clear();
+
     if (this.form.invalid) {
       return;
     }
@@ -45,12 +48,11 @@ export class LoginComponent implements OnInit {
       .pipe(first())
       .subscribe({
         next: () => {
-          // get return url from query parameters or default to home page
           const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
           this.router.navigateByUrl(returnUrl);
         },
         error: error => {
-          alert("Error")
+          this.alertService.error(error, { autoClose: true });
           this.loading = false;
         }
       });

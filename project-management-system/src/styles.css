@@ -5,6 +5,8 @@
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
+
+
 .board-heading {
   font-size: 2.25rem;
   font-weight: 700;
@@ -25,4 +27,25 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   transform: scale(1.02);
   box-shadow: 0 0 15px 7px rgba(34, 60, 80, 0.2);
   transition: box-shadow 0.5s, transform 0.5s;
+}
+ng-component {
+  flex: 1 1 auto;
+  padding: 10px;
+}
+.column-wrapper {
+  max-width: 1200px;
+  overflow-x: auto;
+}
+.column {
+  max-height: 500px;
+  overflow-y: auto;
+}
+.column-section {
+  width: 300px;
+  height: 400px;
+}
+.wrapper {
+  min-height: 80%;
+  display: flex;
+  flex-direction: column;
 }

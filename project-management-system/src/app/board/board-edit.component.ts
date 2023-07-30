@@ -15,7 +15,6 @@ export class BoardEditComponent implements OnInit {
   user?: User | null;
   boardId?: string;
   columns?: Column[];
-  tasks?: Task[];
   deleteCol?: string;
   deleteTas?: string;
 
@@ -32,11 +31,11 @@ constructor(
   ngOnInit() {
     this.boardId = this.route.snapshot.params['id'];
 
-    this.translate.get('DELETE COLUMN').subscribe((translation: string) => {
+    this.translate.stream('DELETE COLUMN').subscribe((translation: string) => {
       this.deleteCol = translation;
     });
 
-    this.translate.get('DELETE TASK').subscribe((translation: string) => {
+    this.translate.stream('DELETE TASK').subscribe((translation: string) => {
       this.deleteTas = translation;
     });
 

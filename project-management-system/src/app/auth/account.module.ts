@@ -7,6 +7,7 @@ import { LayoutComponent } from "./layout/layout.component";
 import { LoginComponent } from "./login/login.component";
 import { SignupComponent } from "./signup/signup.component";
 import {TranslationModule} from "../translation/translation.module";
+import { TranslateService} from "@ngx-translate/core";
 
 @NgModule({
     imports: [
@@ -21,4 +22,9 @@ import {TranslationModule} from "../translation/translation.module";
     SignupComponent
   ]
 })
-export class AccountModule { }
+export class AccountModule {
+  constructor(private translate: TranslateService) {
+
+    this.translate.setDefaultLang('en');
+  }
+}
