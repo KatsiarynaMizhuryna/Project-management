@@ -42,6 +42,7 @@ export class BoardEditComponent implements OnInit {
       this.deleteTas = translation;
     });
 
+
     this.boardService.getBoardById(this.boardId!).pipe(first())
         .subscribe(( board ) => (this.boardTitle = board.title)
         );

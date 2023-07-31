@@ -5,6 +5,8 @@ import { first } from 'rxjs/operators';
 
 import { AccountService} from "../_services/account.service";
 import { AlertService} from "../_services/alert.service";
+import { ModalService} from "../_services/modal.service";
+import { TranslateService} from "@ngx-translate/core";
 
 @Component({ templateUrl: 'profile.component.html' })
 export class ProfileComponent implements OnInit {
@@ -13,12 +15,15 @@ export class ProfileComponent implements OnInit {
   loading = false;
   submitting = false;
   submitted = false;
+  deleteUs?: string;
 
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
     private accountService: AccountService,
-    private alertService: AlertService
+    private alertService: AlertService,
+    private modalService: ModalService,
+    private translate: TranslateService
   ) {}
 
   ngOnInit() {
@@ -38,6 +43,9 @@ export class ProfileComponent implements OnInit {
           this.loading = false;
         });
     }
+    this.translate.stream('DELETE USER').subscribe((translation: string) => {
+      this.deleteUs = translation;
+    });
   }
 
   get f() { return this.form.controls; }
@@ -69,8 +77,10 @@ export class ProfileComponent implements OnInit {
   }
 
   deleteUser() {
-    this.accountService.delete(this.id!)
-      .pipe(first())
-      .subscribe(() => this.id = undefined);
+    this.modalService.openConfirmDialog(this.deleteUs!).afterClosed().subscribe((res) => {if (res) {
+      this.accountService.delete(this.id!)
+          .pipe(first())
+          .subscribe(() => this.id = undefined);
+    }})
   }
 }

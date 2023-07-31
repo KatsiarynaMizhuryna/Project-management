@@ -20,6 +20,3 @@ export interface Task {
   description: string;
 }
 
-export interface DialogData {
-  message: string;
-}
