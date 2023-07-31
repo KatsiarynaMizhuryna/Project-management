@@ -40,6 +40,7 @@
   "VALID DESCRIPTION": "Description is required",
   "ADD NEW COLUMN": "Add new column ",
   "ADD NEW TASK": "Add new task in  ",
-  "COLUMN": "  column"
+  "COLUMN": "  column",
+  "DELETE USER": "Delete this profile?"
 
 }
