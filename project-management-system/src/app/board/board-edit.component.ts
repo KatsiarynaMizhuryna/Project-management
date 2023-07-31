@@ -73,7 +73,7 @@ constructor(
   }
 
   addTask(title: string,  ColumnId: string) {
-    return this.boardService.createTask(this.boardId!, ColumnId, this.user!.id!, title, 'add new task',0)
+    return this.boardService.createTask(this.boardId!, ColumnId, this.user!.id!, title, 'Add your task here!',0)
       .pipe(first())
       .subscribe(task => {
         let index = this.columns!.map(column => column._id).indexOf(ColumnId);

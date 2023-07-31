@@ -15,7 +15,7 @@
 <div class="flex gap-3 m-6  rounded shadow-sm">
   <div *ngFor="let column of columns"
        class=" flex flex-col cursor-pointer shadow-sm bg-yellow-50 column-section rounded">
-    <div class="flex bg-gray-200 justify-between p-2 mb-2">
+    <div class="flex bg-white border border-gray-300 rounded- justify-between p-2 mb-1">
       <h2 class=" text-gray-800 text-semi-bold">{{ column.title | titlecase }}</h2>
       <mat-icon class="text-2xl" (click)="deleteColumn(boardId, column._id)">delete</mat-icon>
     </div>
@@ -29,10 +29,9 @@
       <div *ngFor="let task of column.tasks"
            class=" flex flex-col mb-5 cursor-pointer
           bg-white box-1 rounded-lg p-4">
-        <h2 class="m-0">{{ task._id }}</h2>
         <div class="flex justify-between items-center">
           <h3 class="m-0">{{ task.title | titlecase }}</h3>
-          <div class="flex gap-3 items-center p-2">
+          <div class="flex gap-1 items-center p-2">
           <app-edit-task-body
             (emitText)="editTask(boardId, column._id, task._id, $event.title, $event.description)"
             [question]="('EDIT TASK' | translate)"  [title]="task.title" [description]="task.description" [id]="task._id" >
@@ -41,7 +40,7 @@
              <mat-icon  color="warn" class="text-center" (click)="deleteTask(boardId, column._id, task._id)">delete</mat-icon>
           </div>
         </div>
-          <p class="m-0">{{ task.description }}</p>
+          <p class=" text-gray-500 m-0">{{ task.description }}</p>
       </div>
     </div>
   </div>

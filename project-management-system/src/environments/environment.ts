@@ -1,4 +1,4 @@
 export const environment = {
   production: false,
-  apiUrl: 'http://localhost:3000'
+  apiUrl: 'https://final-task-backend-production-3f07.up.railway.app' // 'http://localhost:3000'
 }
