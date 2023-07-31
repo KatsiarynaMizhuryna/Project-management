@@ -35,6 +35,10 @@ export class BoardServiceV2 {
     return this.http.get<Column[]>(`${environment.apiUrl}/boards/${boardId}/columns`);
   }
 
+  getColumnById(boardId: string, columnId: string ) {
+    return this.http.get<Column>(`${environment.apiUrl}/boards/${boardId}/columns/${columnId}`);
+  }
+
   createColumn(boardId: string, title: string, order: number) {
     return this.http.post<Column>(`${environment.apiUrl}/boards/${boardId}/columns`, {'title': title, 'order': order});
   }

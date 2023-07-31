@@ -16,13 +16,16 @@
   <div *ngFor="let column of columns"
        class=" flex flex-col cursor-pointer shadow-sm bg-yellow-50 column-section rounded">
     <div class="flex bg-white border border-gray-300 rounded- justify-between p-2 mb-1">
-      <div class=" text-gray-800 text-bold" *ngIf="!isEditing" (click)="isEditing = true">{{ column.title | titlecase }}</div>
-      <div *ngIf="isEditing">
+      <div class="text-gray-800 text-bold" [id]="column._id" *ngIf="column._id !== selectedColId" (click)="changeEditing($event)">{{ column.title | titlecase }}</div>
+      <div *ngIf="column._id == selectedColId" class="flex-col">
         <mat-form-field appearance="fill">
-          <input matInput [(ngModel)]="column.title" (blur)="isEditing = false">
+          <input matInput [(ngModel)]="column.title">
         </mat-form-field>
+        <div class="flex gap-1">
+        <button class=" border border-gray-600 bg-green-300 rounded p-1" (click)="editColumn(boardId, column._id, column.title)">Submit</button>
+        <button class=" border border-gray-600 bg-green-300 rounded p-1" (click)="cancelColumnEdit()">Cancel</button>
       </div>
-      <!--<h2 class=" text-gray-800 text-semi-bold">{{ column.title | titlecase }}</h2>-->
+      </div>
       <mat-icon class="text-2xl" (click)="deleteColumn(boardId, column._id)">delete</mat-icon>
     </div>
     <app-add-new-element-dialog

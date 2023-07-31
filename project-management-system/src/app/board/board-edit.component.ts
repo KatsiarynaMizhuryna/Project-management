@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { BoardServiceV2 } from "../_services/board.service-v2";
 import { ModalService } from "../_services/modal.service";
@@ -11,13 +11,15 @@ import { TranslateService} from "@ngx-translate/core";
 
 @Component({ templateUrl: 'board-edit.component.html' })
 export class BoardEditComponent implements OnInit {
+  @Input() id: string = '';
   user?: User | null;
   boardId?: string;
   columns?: Column[];
   deleteCol?: string;
   deleteTas?: string;
-  isEditing = false;
   boardTitle?: string;
+  isEditing: boolean = false;
+  selectedColId?: string;
 
   constructor(
     private route: ActivatedRoute,
@@ -31,15 +33,19 @@ export class BoardEditComponent implements OnInit {
 
   ngOnInit() {
     this.boardId = this.route.snapshot.params['id'];
+
     this.translate.stream('DELETE COLUMN').subscribe((translation: string) => {
       this.deleteCol = translation;
     });
+
     this.translate.stream('DELETE TASK').subscribe((translation: string) => {
       this.deleteTas = translation;
     });
+
     this.boardService.getBoardById(this.boardId!).pipe(first())
         .subscribe(( board ) => (this.boardTitle = board.title)
         );
+
 
     this.boardService.getColumns(this.boardId!)
       .pipe(first())
@@ -48,6 +54,7 @@ export class BoardEditComponent implements OnInit {
           return { ...column, ...{tasks: []} };
         })
       });
+
     this.boardService.getBoardTasks(this.boardId!)
       .pipe(map(tasks => {
         this.columns = this.columns!.map(column => {
@@ -109,10 +116,21 @@ export class BoardEditComponent implements OnInit {
      .subscribe((res) => {
        this.ngOnInit();}
      )}
-  editColumn(BoardId: string | undefined, ColumnId: string, TaskId: string, title: string, description: string){
+  editColumn(BoardId: string | undefined, ColumnId: string, title: string){
+    this.selectedColId = undefined;
     return this.boardService.editColumn(BoardId, ColumnId, title,0)
       .pipe(first())
       .subscribe((res) => {
         this.ngOnInit();}
       )}
+  changeEditing(event: Event) {
+    this.selectedColId = (event.currentTarget as HTMLElement).id;
+    this.isEditing = !this.isEditing;
+
+  }
+  cancelColumnEdit() {
+    this.selectedColId = undefined;
+  }
 }
+
+
