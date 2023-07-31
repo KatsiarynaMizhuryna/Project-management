@@ -1,4 +1,4 @@
-<h2 class="board-heading text-center">{{ 'SELECTED' | translate }}: {{boardId}} </h2>
+<h2 class="board-heading text-center">{{ 'SELECTED' | translate }}: {{ boardTitle}} </h2>
 <div class="flex gap-6 justify-center">
   <button mat-icon-button [routerLink]="'/main-route'" >
   <mat-icon class="green-color" >arrow_back</mat-icon>
@@ -16,7 +16,13 @@
   <div *ngFor="let column of columns"
        class=" flex flex-col cursor-pointer shadow-sm bg-yellow-50 column-section rounded">
     <div class="flex bg-white border border-gray-300 rounded- justify-between p-2 mb-1">
-      <h2 class=" text-gray-800 text-semi-bold">{{ column.title | titlecase }}</h2>
+      <div class=" text-gray-800 text-bold" *ngIf="!isEditing" (click)="isEditing = true">{{ column.title | titlecase }}</div>
+      <div *ngIf="isEditing">
+        <mat-form-field appearance="fill">
+          <input matInput [(ngModel)]="column.title" (blur)="isEditing = false">
+        </mat-form-field>
+      </div>
+      <!--<h2 class=" text-gray-800 text-semi-bold">{{ column.title | titlecase }}</h2>-->
       <mat-icon class="text-2xl" (click)="deleteColumn(boardId, column._id)">delete</mat-icon>
     </div>
     <app-add-new-element-dialog

@@ -20,7 +20,9 @@ export class BoardServiceV2 {
   getAll() {
     return this.http.get<Board[]>(`${environment.apiUrl}/boards`);
   }
-
+  getBoardById(boardId: string){
+  return this.http.get<Board>(`${environment.apiUrl}/boards/${boardId}`);
+}
   getById(userId: string) {
     return this.http.get<Board[]>(`${environment.apiUrl}/boardsSet/${userId}`);
   }
@@ -50,7 +52,6 @@ export class BoardServiceV2 {
   }
 
   createTask(boardId: string, columnId: string, userId: string, title: string, description: string, order: number) {
-    console.log(userId) // TODO: remove
     return this.http.post<Task>(`${environment.apiUrl}/boards/${boardId}/columns/${columnId}/tasks`,
       {'userId': userId, 'title': title, 'description': description, 'order': order, 'users': []});
   }

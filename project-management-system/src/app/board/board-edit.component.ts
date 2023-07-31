@@ -16,8 +16,10 @@ export class BoardEditComponent implements OnInit {
   columns?: Column[];
   deleteCol?: string;
   deleteTas?: string;
+  isEditing = false;
+  boardTitle?: string;
 
-constructor(
+  constructor(
     private route: ActivatedRoute,
     private boardService: BoardServiceV2,
     private modalService: ModalService,
@@ -35,6 +37,10 @@ constructor(
     this.translate.stream('DELETE TASK').subscribe((translation: string) => {
       this.deleteTas = translation;
     });
+    this.boardService.getBoardById(this.boardId!).pipe(first())
+        .subscribe(( board ) => (this.boardTitle = board.title)
+        );
+
     this.boardService.getColumns(this.boardId!)
       .pipe(first())
       .subscribe(columns => {

@@ -31,8 +31,6 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 ng-component {
   flex: 1 1 auto;
   padding: 10px;
-  width: 1200px;
-  overflow-x: auto;
 }
 .column-wrapper {
   overflow-x: auto;
