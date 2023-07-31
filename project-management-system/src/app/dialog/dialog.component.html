@@ -1,0 +1,20 @@
+<div class="max-w-sm mx-auto bg-white  rounded-lg overflow-hidden shadow-lg">
+  <div class="flex justify-end bg-green-500 text-white py-2 px-4">
+    <mat-icon id="close-icon" class="cursor-pointer" (click)="closeDialog()">close</mat-icon>
+  </div>
+    <div class="p-4">
+      <span class="w-full text-gray-900">{{ data.message }}</span>
+    </div>
+
+  <div class="flex justify-center gap-4 px-4 pb-4 rounded-b-lg">
+    <button mat-button
+            class="bg-green-500 hover:bg-green-700 text-white font-bold py-2
+                px-4 rounded focus:outline-none focus:shadow-outline"
+            [mat-dialog-close]="true">{{ 'YES' | translate }}</button>
+    <button mat-button
+            class="bg-green-500 hover:bg-green-700 text-white font-bold py-2
+                px-4 rounded focus:outline-none focus:shadow-outline"
+            [mat-dialog-close]="false">{{ 'NO' | translate }}</button>
+  </div>
+</div>
+

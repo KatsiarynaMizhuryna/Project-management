@@ -1,0 +1,14 @@
+<div class="ml-5 mr-5">
+  <h2 class="board-heading">{{ 'HELLO' | translate }},  {{ user?.login }}! {{ 'BOARDS' | translate }} </h2>
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 m-6">
+  <div *ngFor="let board of boards" routerLink="/boards/edit/{{ board._id }}"
+       class="flex justify-between p-4 rounded-md cursor-pointer
+        bg-gradient-to-r from-green-400 to-blue-500 shadow-lg hover:shadow-xl transition-shadow duration-300">
+    <h2 class="text-xl font-semi-bold text-white">{{ board.title }}</h2>
+    <button mat-icon-button class="text-gray-400 hover:text-red-500 focus:outline-none" (click)="deleteBoard(board._id)">
+      <mat-icon class="text-2xl">delete</mat-icon>
+    </button>
+  </div>
+</div>
+</div>
+
